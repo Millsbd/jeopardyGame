@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../Desktop/test_ex/jeopardy"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "jeopardyV2"
+	}
+}
