@@ -8,12 +8,6 @@ button.innerText = 'Restart Game';
 let categories = [];
 let url = "http://jservice.io/api"
 
-addEventListener('load', () => {
-    console.log('the page has loaded');
-    gatherData();
-    generateTable();
-})
-
 button.addEventListener('click', () => {
     divContainer.innerHTML = '';
     gatherData();
@@ -59,7 +53,9 @@ function generateTable(){
     for(let i = 0; i <= 5; i++){
         const headCell = document.createElement('th');
         headCell.setAttribute('class', 't-head');
+        if(categories.length > 0){
         headCell.innerText = categories[i].title;
+        }
         headRow.appendChild(headCell);
     }
     // Creates header row for titles and adds in the values from categories array. Each i in the loop is a vertical th in the tr row. 
@@ -71,7 +67,9 @@ function generateTable(){
                // adding 6 vertical colums to each row
             cell.setAttribute('class', 't-body');
             cell.setAttribute('id', `${j}-${i}`);
+            if(categories.length > 0){
             cell.innerText = categories[j].clues[i].showing; 
+            }
             row.appendChild(cell);
         }
         tblBody.appendChild(row);
@@ -85,26 +83,11 @@ function generateTable(){
     tblBody.addEventListener('click', function handleClick(evt){
         let element = evt.target;
         const idText = element.getAttribute('id');
-        element.innerText = categories[idText[0]].clues[idText[2]].question;
-        element.setAttribute('class', 'question');
-
-        element.addEventListener('click', function (e){
-            console.log(e.target);
-            const idT = e.target.getAttribute('id');
-            e.target.innerText = categories[idT[0]].clues[idT[2]].answer;
-            e.target.setAttribute('class', 'answer');
-        })
-    });
-    // **Same problem as with the if below can only get it to show quesion or answer not question then click then answer**
-
-    tblBody.addEventListener('click', function handleClick(evt){
-        let element = evt.target;
-        const idText = element.getAttribute('id');
-        if(element.innerText = categories[idText[0]].clues[idText[2]].showing){
+        if(element.innerText === categories[idText[0]].clues[idText[2]].showing){
         element.innerText = categories[idText[0]].clues[idText[2]].question;
         element.setAttribute('class', 'question');
         }
-        if(element.innerText = categories[idText[0]].clues[idText[2]].question){
+        else if(element.innerText === categories[idText[0]].clues[idText[2]].question){
         element.innerText = categories[idText[0]].clues[idText[2]].answer;
         element.setAttribute('class', 'answer');
         }
